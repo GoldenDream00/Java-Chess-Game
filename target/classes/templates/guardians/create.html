@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Student Management System</title>
+    <link crossorigin="anonymous"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          rel="stylesheet">
+</head>
+<body>
+<div th:replace="home::header"></div>
+<div class="container">
+    <h1>Step 1: Register student's guardian.</h1>
+    <hr>
+    <h2>Add Guardian</h2>
+
+    <form class="form-group" action="#" method="POST" th:action="@{/guardians/store}"
+          th:object="${guardian}">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="firstname">FirstName</label>
+                <input class="form-control" placeholder="Student First Name" id="firstname"
+                       th:field="*{firstName}" type="text">
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="lastname">LastName</label>
+                <input class="form-control" placeholder="Student Last Name" id="lastname"
+                       th:field="*{lastName}" type="text">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="Email">Email</label>
+                <input class="form-control" placeholder="Email" id="Email"
+                       th:field="*{login.email}" type="text">
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="password">Password</label>
+                <input class="form-control" placeholder="password" id="password"
+                       th:field="*{login.password}" type="text">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="school">Phone</label>
+                <input class="form-control" placeholder="Phone" id="school"
+                       th:field="*{phone}" type="text">
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="dob">Notes</label>
+                <input class="form-control" placeholder="Notes" id="dob"
+                       th:field="*{notes}" type="text">
+            </div>
+        </div>
+        <hr/>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="Country">Country</label>
+                <input type="text" class="form-control" id="Country"  placeholder="Enter a country name" th:field="*{address.country}">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="city">City</label>
+                <input type="text" class="form-control" id="city" placeholder="Enter a city" th:field="*{address.city}">
+            </div>
+
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="street">Street</label>
+                <input type="text" class="form-control" id="street"  placeholder="Enter a street" th:field="*{address.street}">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="zip">Zip</label>
+                <input type="text" class="form-control" id="zip" placeholder="Enter a Zip" th:field="*{address.zip}">
+            </div>
+        </div>
+
+        <button class="btn btn-info col-2" type="submit"> Add Guardian</button>
+    </form>
+
+    <hr>
+
+    <a th:href="@{/guardians}"> Back to Guardian List</a>
+</div>
+</body>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"  crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</html>

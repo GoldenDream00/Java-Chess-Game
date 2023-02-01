@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Student Management System</title>
+    <link crossorigin="anonymous"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          rel="stylesheet">
+</head>
+<body>
+<div th:replace="home::header"></div>
+<div class="container">
+    <h1>Student Management System</h1>
+    <hr>
+    <h2>Login Page</h2>
+
+    <form  class="form-group" action="#" method="POST" th:action="@{/signup}" th:object="${user}">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name"  placeholder="Enter a name" th:field="*{name}" required>
+        </div>
+        <div class="form-group">
+            <label for="surname">Surname</label>
+            <input type="text" class="form-control" id="surname" placeholder="Enter a surname" th:field="*{surname}" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email"  placeholder="Enter an email" th:field="*{login.email}" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" placeholder="Password" th:field="*{login.password}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="Country">Country</label>
+            <input type="text" class="form-control" id="Country"  placeholder="Enter a country name" th:field="*{address.country}">
+        </div>
+        <div class="form-group">
+            <label for="city">City</label>
+            <input type="text" class="form-control" id="city" placeholder="Enter a city" th:field="*{address.city}">
+        </div>
+        <div class="form-group">
+            <label for="street">Street</label>
+            <input type="text" class="form-control" id="street"  placeholder="Enter a street" th:field="*{address.street}">
+        </div>
+        <div class="form-group">
+            <label for="zip">Zip</label>
+            <input type="text" class="form-control" id="zip" placeholder="Enter a Zip" th:field="*{address.zip}">
+        </div>
+        <button class="btn btn-info col-2" type="submit"> SignUp</button>
+    </form>
+    <hr>
+
+</div>
+</body>
+</html>

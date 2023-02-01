@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Student Management System</title>
+
+    <link crossorigin="anonymous"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          rel="stylesheet">
+
+</head>
+<body>
+<div th:replace="home::header"></div>
+<div class="container my-2">
+    <h1>Guardians List</h1>
+
+    <a class="btn btn-primary btn-sm mb-3" th:href="@{/guardians/create}"> Add Guardian </a>
+
+    <table border="1" class="table table-striped table-responsive-md">
+        <thead>
+        <tr>
+            <th>FirstName</th>
+            <th>LastName</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Registration Date</th>
+            <th>Operations</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="guardian : ${guardians}">
+            <td th:text="${guardian.firstName}"></td>
+            <td th:text="${guardian.lastName}"></td>
+            <td th:text="${guardian.phone}"></td>
+            <td th:text="${guardian.getLogin().getEmail()}"></td>
+            <td th:text="${guardian.getRegistionDateToString()}"></td>
+            <td>
+                <a class="btn btn-danger" th:href="@{'/guardians/delete/' + ${guardian.id}}">Delete</a>
+                <a class="btn btn-primary" th:href="@{'/guardians/update/' + ${guardian.id}}">Update</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+</body>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"  crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</html>

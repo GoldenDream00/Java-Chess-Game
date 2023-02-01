@@ -1,0 +1,115 @@
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Hello WebSocket</title>
+    <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="/scripts/chessboardjs-0.3.0/css/chessboard-0.3.0.css" />
+
+    <link rel="stylesheet" href="/scripts/jquery-ui-1.12.0/jquery-ui.css" />
+
+
+</head>
+<body>
+<div id="main-content" class="container">
+    <h2>Welcome to Online Chess App</h2>
+    <div class="row">
+        <div class="col-md-4">
+            <form class="form-inline">
+                <div class="form-group">
+                    <label for="nickname">Nick Name</label>
+                    <select class="form-control" id="nickname">
+                        <option th:each="student : ${students}" th:value="${student.nickname}" th:text="${student.nickname}"></option>
+                    </select>
+                    <!--                                <input type="text" id="inviteName" class="form-control">-->
+                </div>
+            </form>
+<!--            <form class="form-inline">-->
+<!--                <div class="form-group">-->
+<!--                    <label for="nickname">NickName</label>-->
+<!--                    <input type="text" id="nickname" class="form-control" placeholder="Your name here...">-->
+<!--                </div>-->
+<!--            </form>-->
+        </div>
+        <div class="col-md-4">
+            <button id="connect" class="btn btn-default" type="submit">Connect</button>
+            <button id="disconnect" class="btn btn-default" type="submit">Disconnect</button>
+            <a id="back" class="btn btn-default" th:href="@{/}">Return to Home</a>
+        </div>
+        <div class="col-md-3">
+            Status:
+            <div id="connecting">
+                Disconnected...
+            </div>
+
+        </div>
+        <button id="start" class="btn btn-success">Start</button>
+
+    </div>
+
+    <hr/>
+    <div class="row" id="game_pan">
+        <h2><span id="sideToMove"></span> to move.</h2>
+        <div id="board"></div>
+        <div id="promotion-dialog">
+            <ol id="promote-to">
+                <li class="ui-state-default"><span class="piece-name">q</span><img class="promotion-piece-q promotion-piece" />
+                </li>
+                <li class="ui-state-default"><span class="piece-name">r</span><img class="promotion-piece-r promotion-piece" />
+                </li>
+                <li class="ui-state-default"><span class="piece-name">n</span><img class="promotion-piece-n promotion-piece" />
+                </li>
+                <li class="ui-state-default"><span class="piece-name">b</span><img class="promotion-piece-b promotion-piece" />
+                </li>
+            </ol>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="settingModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="closeSettingBtn"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Game Settings</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-9">
+                        <form class="form-inline">
+                            <div class="form-group">
+                                <label for="nickname">Invite Name</label>
+                                <select class="form-control" id="inviteName">
+                                    <option th:each="student : ${students}" th:value="${student.nickname}" th:text="${student.nickname}"></option>
+                                </select>
+<!--                                <input type="text" id="inviteName" class="form-control">-->
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-3">
+                        <button id="invite" class="btn btn-default" type="button">Invite</button>
+                        <button id="random" class="btn btn-success" type="button">Random</button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div id="inviteStatus" style="float:left;">Error</div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+<script src="/webjars/jquery/jquery.min.js"></script>
+<script src="/scripts/jquery-ui-1.12.0/jquery-ui.js"></script>
+<script src="/webjars/sockjs-client/sockjs.min.js"></script>
+<script src="/webjars/stomp-websocket/stomp.min.js"></script>
+<script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
+<script src="/scripts/chessboardjs-0.3.0/js/chessboard-0.3.0.js"></script>
+<script src="/scripts/chessboardjs-themes.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.2/chess.js"></script>
+<script src="/scripts/app.js"></script>
+</html>

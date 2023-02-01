@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security5">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Student Management System</title>
+    <link crossorigin="anonymous"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          rel="stylesheet">
+</head>
+<body>
+<div th:replace="home::header"></div>
+<div class="container">
+    <h1>Student Management System</h1>
+    <hr>
+    <table border="1" class="table table-striped table-responsive-md">
+        <thead>
+        <tr>
+            <th>No</th>
+            <th>Student NickName</th>
+            <th>register Date</th>
+            <th sec:authorize="hasAuthority('ADMIN')">Operations</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="register, iStat : ${registers}">
+            <td th:text="${iStat.count}"></td>
+            <td th:text="${register.getStudent().getNickname()}"></td>
+            <td th:text="${register.registrationDate}"></td>
+            <td sec:authorize="hasAuthority('ADMIN')">
+                <a class="btn btn-danger" th:href="@{'/events/unregister/events/' + ${id} + '/' + ${register.getStudent().getId()}}">Cancel</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <hr>
+
+    <a th:href="@{/events/}"> Back to Event List</a>
+</div>
+</body>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"  crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</html>

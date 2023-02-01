@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Student Management System</title>
+    <link crossorigin="anonymous"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          rel="stylesheet">
+</head>
+<body>
+<div th:replace="home::header"></div>
+<div class="container">
+    <h1>Student Management System</h1>
+    <hr>
+    <h2>Add Article</h2>
+
+    <form  action="#" method="POST" th:action="@{/articles/store}"
+          th:object="${article}">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="firstname">Title</label>
+                <input placeholder="Title" id="firstname"
+                       th:field="*{title}" type="text" th:class="${#fields.hasErrors('title')}?'form-control is-invalid':'form-control'">
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <label for="article">Article</label>
+            <textarea th:field="*{article}" placeholder="Article" id="article" th:class="${#fields.hasErrors('article')}?'form-control is-invalid':'form-control'"></textarea>
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('article')}" th:errors="*{article}">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="Email">Author</label>
+                <input th:class="${#fields.hasErrors('author')}?'form-control is-invalid':'form-control'" placeholder="Author" id="Email"
+                       th:field="*{author}" type="text">
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('author')}" th:errors="*{author}">
+                </div>
+            </div>
+
+            <div class="form-group col-md-6">
+                <div class="form-group col-md-6">
+                    <label for="Country">picture URL</label>
+                    <input type="text" th:class="${#fields.hasErrors('pictureUrl')}?'form-control is-invalid':'form-control'" id="Country"  placeholder="Enter a picture URL" th:field="*{pictureUrl}">
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('pictureUrl')}" th:errors="*{pictureUrl}">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button class="btn btn-info col-2" type="submit"> Add Article</button>
+    </form>
+
+    <hr>
+
+    <a th:href="@{/articles/}"> Back to Article List</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Student Management System</title>
+
+    <link crossorigin="anonymous"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          rel="stylesheet">
+
+</head>
+<body>
+<div th:replace="home::header"></div>
+<div class="container my-2">
+    <h1>My Homework List</h1>
+
+    <table border="1" class="table table-striped table-responsive-md">
+        <thead>
+        <tr>
+            <th>title</th>
+            <th>Teacher</th>
+            <th>Student NickName</th>
+            <th>dataPublished</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="homework : ${homeworks}">
+            <td th:text="${homework.title}"></td>
+            <td th:text="${homework.teacher.firstName}"></td>
+            <td th:text="${homework.student.nickname}"></td>
+            <td th:text="${homework.dataPublished}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+</body>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"  crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</html>

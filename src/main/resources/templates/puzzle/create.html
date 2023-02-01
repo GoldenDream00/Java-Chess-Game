@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Student Management System</title>
+    <link crossorigin="anonymous"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          rel="stylesheet">
+</head>
+<body>
+<div th:replace="home::header"></div>
+<div class="container">
+    <h1>Student Management System</h1>
+    <hr>
+    <h2>Add Puzzle</h2>
+
+    <form class="form-group" action="#" method="POST" th:action="@{/puzzle/store}"
+          th:object="${puzzle}">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="firstname">Title</label>
+                <input class="form-control" placeholder="Title" id="firstname"
+                       th:field="*{title}" type="text">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="firstname">Ranking</label>
+                <input class="form-control" placeholder="Ranking" id="firstname"
+                       th:field="*{ranking}" type="number">
+            </div>
+        </div>
+        <div class="form-row">
+            <label for="article">Description</label>
+            <textarea th:field="*{description}" placeholder="Description" id="article" class="form-control"></textarea>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="Email">Author</label>
+                <input class="form-control" placeholder="Author" id="Email"
+                       th:field="*{author}" type="text">
+            </div>
+
+            <div class="form-group col-md-6">
+                <div class="form-group col-md-6">
+                    <label for="Country">picture URL</label>
+                    <input type="text" class="form-control" id="Country"  placeholder="Enter a picture URL" th:field="*{pictureurl}">
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="Email">FEN</label>
+                <input class="form-control" placeholder="FEN" id="Email"
+                       th:field="*{fen}" type="text">
+            </div>
+
+            <div class="form-group col-md-6">
+                <div class="form-group col-md-6">
+                    <label for="Country">PGN</label>
+                    <input type="text" class="form-control" id="Country"  placeholder="PGN" th:field="*{pgn}">
+                </div>
+            </div>
+        </div>
+
+        <button class="btn btn-info col-2" type="submit"> Add Puzzle</button>
+    </form>
+
+    <hr>
+
+    <a th:href="@{/puzzle/}"> Back to Puzzle List</a>
+</div>
+</body>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"  crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</html>

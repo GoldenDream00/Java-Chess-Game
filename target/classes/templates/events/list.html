@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security5">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>event registartion</title>
+
+    <link crossorigin="anonymous"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          rel="stylesheet">
+
+</head>
+<body>
+<div th:replace="home::header"></div>
+<div class="container my-2">
+    <h2>Register to the event, you can choose multiple events and got to 10% of discount if you chose more that 4 events.</h2>
+    <h1>Events List</h1>
+
+    <a class="btn btn-primary btn-sm mb-3" th:href="@{/events/create}" sec:authorize="hasAuthority('ADMIN')"> Add Event </a>
+    <table border="1" class="table table-striped table-responsive-md">
+        <thead>
+        <tr>
+            <th>title</th>
+            <th>startEvent</th>
+            <th>endEvent</th>
+            <th>price</th>
+            <!--            This only shows when user logged as a student role-->
+            <th >Operations</th>
+
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="event : ${events}">
+            <td th:text="${event.title}"></td>
+            <td th:text="${event.startEvent}"></td>
+            <td th:text="${event.endEvent}"></td>
+            <td th:text="${event.price}"></td>
+            <td sec:authorize="hasAuthority('ADMIN')">
+                <a class="btn btn-danger" th:href="@{'/events/delete/' + ${event.id}}">Delete</a>
+                <a class="btn btn-primary" th:href="@{'/events/update/' + ${event.id}}">Update</a>
+                <a class="btn btn-warning" th:href="@{'/events/register/adminshow/' + ${event.id}}">Details</a>
+            </td>
+            <td sec:authorize="hasAuthority('GUARDIAN')">
+                <a class="btn btn-warning" th:href="@{'/events/register/guardianshow/' + ${event.id}}">Details</a>
+            </td>
+            <td sec:authorize="isAnonymous()">
+                <a class="btn btn-warning" th:href="@{'/events/register/adminshow/' + ${event.id}}">Details</a>
+            </td>
+
+<!--            <td>-->
+<!--            &lt;!&ndash;            This only shows when user logged as a student role and add register button&ndash;&gt;-->
+<!--            <div sec:authorize="hasAuthority('GUARDIAN')" th:if="${registerService.verifyRegistered(event.id) == true}">-->
+<!--                <a class="btn btn-primary" th:href="@{'/events/register/' + ${event.id}}">Register</a>-->
+
+<!--            &lt;!&ndash; add register button if anonymous&ndash;&gt;-->
+<!--            </div>-->
+
+<!--                <div sec:authorize="isAnonymous()">-->
+<!--                <a class="btn btn-primary" th:href="@{'/guardians/create'}">Register</a>-->
+<!--                </div>-->
+
+<!--            &lt;!&ndash; add register button if anonymous&ndash;&gt;-->
+
+
+<!--            <div sec:authorize="hasAuthority('STUDENT')" th:if="${registerService.verifyRegistered(event.id) == false}">-->
+<!--                <a class="btn btn-danger" th:href="@{'/events/unregister/' + ${event.id}}">Cancel</a>-->
+<!--            </div>-->
+<!--            </td>-->
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+</body>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"  crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</html>

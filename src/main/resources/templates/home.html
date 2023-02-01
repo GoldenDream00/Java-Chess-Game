@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security5">
+<head>
+    <meta charset="utf-8">
+    <title>Student Management System</title>
+
+    <link crossorigin="anonymous"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          rel="stylesheet">
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;" th:fragment="header">
+        <a class="navbar-brand" th:href="@{/}">Brand Logo</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/articles/}">Article</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/events/}">Events</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/about}">About</a>
+                </li>
+                <li class="nav-item" sec:authorize="hasAnyAuthority('ADMIN', 'GUARDIAN')">
+                    <a class="nav-link" th:href="@{/students/}">Students</a>
+                </li>
+                <li class="nav-item" >
+                    <a class="nav-link" th:href="@{/students/create}">Student's registration</a>
+                </li>
+                <li class="nav-item" >
+                    <a class="nav-link" th:href="@{/guardians/create}">Guardians's registration</a>
+                </li>
+                <li class="nav-item" >
+                    <a class="nav-link" th:href="@{/teachers/create}">Teacher's registration</a>
+                </li>
+                <li class="nav-item" sec:authorize="hasAuthority('ADMIN')">
+                    <a class="nav-link" th:href="@{/teachers/}">Teachers</a>
+                </li>
+                <li class="nav-item" sec:authorize="hasAuthority('ADMIN')">
+                    <a class="nav-link" th:href="@{/guardians/}">Guardian</a>
+                </li>
+
+                <li class="nav-item" sec:authorize="hasAuthority('TEACHER')">
+                    <a class="nav-link" th:href="@{/attendance/}">Attendance</a>
+                </li>
+                <li class="nav-item" sec:authorize="hasAuthority('TEACHER')">
+                    <a class="nav-link" th:href="@{/puzzle/}">Puzzle</a>
+                </li>
+                <li class="nav-item" sec:authorize="hasAuthority('TEACHER')">
+                    <a class="nav-link" th:href="@{/homework/}">Homework</a>
+                </li>
+                <li class="nav-item" sec:authorize="hasAuthority('GUARDIAN')">
+                    <a class="nav-link" th:href="@{/homework/individual/}">My Homework</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/chess/}">Online Game</a>
+                </li>
+
+            </ul>
+            <ul class="navbar-nav" >
+                <div class="dropdown">
+                    <ul class="nav-item dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                        <a th:text="${username}" sec:authorize="hasAnyAuthority('ADMIN', 'GUARDIAN', 'TEACHER')"></a>
+                    </ul>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                        <form th:action="@{/logout}" method="post" class="dropdown-item">
+                            <input type="submit" value="Log out" style="background-color: transparent; border: 0;"></input>
+                        </form>
+                    </div>
+                </div>
+            </ul>
+        </div>
+    </nav>
+</body>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"  crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</html>
