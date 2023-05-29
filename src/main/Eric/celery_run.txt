@@ -1,0 +1,1 @@
+celery -A viho worker -l info --pool=solo
